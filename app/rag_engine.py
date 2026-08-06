@@ -11,27 +11,38 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 class GeminiEmbeddingFunction(EmbeddingFunction):
-    """Custom ChromaDB Embedding Function using Google Gemini embedding-001."""
+    """Custom ChromaDB Embedding Function using Google Gemini embedding-001 with automatic retry handling."""
     def __init__(self, client: genai.Client):
         self.client = client
 
     def __call__(self, input: Documents) -> Embeddings:
         if not input:
             return []
-        try:
-            # Generate embeddings via Google GenAI SDK
-            embeddings_list = []
-            # Process in small batches if necessary
-            for text in input:
-                response = self.client.models.embed_content(
-                    model="gemini-embedding-001",
-                    contents=text
-                )
-                embeddings_list.append(response.embeddings[0].values)
-            return embeddings_list
-        except Exception as e:
-            # Fallback warning if embedding call fails
-            raise RuntimeError(f"Gemini Embedding Service error: {str(e)}")
+        
+        embeddings_list = []
+        for text in input:
+            success = False
+            last_err = None
+            for attempt in range(3):
+                try:
+                    response = self.client.models.embed_content(
+                        model="gemini-embedding-001",
+                        contents=text
+                    )
+                    embeddings_list.append(response.embeddings[0].values)
+                    success = True
+                    break
+                except Exception as e:
+                    last_err = e
+                    time.sleep(0.5 * (attempt + 1))
+            
+            if not success:
+                err_str = str(last_err)
+                if "name resolution" in err_str.lower() or "gai_error" in err_str.lower():
+                    raise RuntimeError("Temporary network failure in name resolution when connecting to Gemini API. Please check your internet connection and try again.")
+                raise RuntimeError(f"Gemini Embedding Service error: {err_str}")
+
+        return embeddings_list
 
 
 class RAGEngine:
@@ -225,7 +236,7 @@ Rules:
 User Query: {user_query}
 Grounded Answer:"""
 
-        candidate_models = ["gemini-3.5-flash", "gemini-3.6-flash", "gemini-flash-latest", "gemini-2.0-flash"]
+        candidate_models = ["gemini-3.5-flash", "gemini-3.6-flash", "gemini-flash-latest"]
         last_error = None
         response_text = None
         model_used = None
