@@ -214,7 +214,9 @@ async function submitQuery() {
 
         if (statusMessage) statusMessage.style.display = 'none';
         if (responseBody) responseBody.style.display = 'block';
-        if (answerText) answerText.textContent = data.answer;
+        
+        // Render answer with HTML Markdown parsing so **bold** shows as bold text
+        if (answerText) answerText.innerHTML = parseMarkdownToHtml(data.answer);
 
         if (citationsWrapper && citationsList) {
             if (data.citations && data.citations.length > 0) {
@@ -236,6 +238,44 @@ async function submitQuery() {
     } finally {
         queryBtn.disabled = false;
     }
+}
+
+/* Markdown Parser to HTML */
+function parseMarkdownToHtml(markdownStr) {
+    if (!markdownStr) return '';
+
+    // Sanitize basic HTML entities
+    let html = markdownStr
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+    // Headings
+    html = html.replace(/^### (.*$)/gim, '<h4 class="md-h4">$1</h4>');
+    html = html.replace(/^## (.*$)/gim, '<h3 class="md-h3">$1</h3>');
+    html = html.replace(/^# (.*$)/gim, '<h2 class="md-h2">$1</h2>');
+
+    // Bold: **text** or __text__
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+
+    // Italic: *text* or _text_
+    html = html.replace(/(^|[^\*])\*([^\*\n]+)\*([^\*]|$)/g, '$1<em>$2</em>$3');
+
+    // Bullet points (* item or - item)
+    html = html.replace(/^\s*[\*\-]\s+(.*$)/gim, '<li>$1</li>');
+
+    // Group adjacent <li> items into <ul>
+    html = html.replace(/(<li>[\s\S]*?<\/li>)/gi, (match) => {
+        return `<ul class="md-list">${match}</ul>`;
+    });
+    html = html.replace(/<\/ul>\s*<ul class="md-list">/g, '');
+
+    // Paragraph line breaks
+    html = html.replace(/\n\n/g, '<br><br>');
+    html = html.replace(/\n/g, '<br>');
+
+    return html;
 }
 
 function escapeHtml(str) {

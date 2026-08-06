@@ -218,6 +218,32 @@ textarea:focus {
     margin-bottom: 20px;
 }
 
+.answer-text strong {
+    font-weight: 700;
+    color: #111827;
+}
+
+.answer-text em {
+    font-style: italic;
+    color: #374151;
+}
+
+.answer-text ul.md-list {
+    margin: 8px 0 12px 20px;
+    padding: 0;
+}
+
+.answer-text li {
+    margin-bottom: 4px;
+}
+
+.answer-text h4.md-h4, .answer-text h3.md-h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 12px 0 6px 0;
+    color: #111827;
+}
+
 .citations-wrapper {
     margin-top: 16px;
     padding-top: 16px;

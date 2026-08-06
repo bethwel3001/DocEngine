@@ -216,7 +216,7 @@ Answer the user query relying STRICTLY on the provided source document excerpts.
 Rules:
 1. For every key point, cite the source document name.
 2. If the context does not contain the answer, reply cleanly: "Requested information is not present in the uploaded source documents."
-3. Keep the answer structured, concise, professional, and clear.
+3. Keep the answer structured, well-explained, complete, and fully written without cutting off mid-sentence.
 
 --- INGESTED DOMAIN KNOWLEDGE ---
 {context_str}
@@ -237,7 +237,7 @@ Grounded Answer:"""
                     contents=system_prompt,
                     config=types.GenerateContentConfig(
                         temperature=0.2,
-                        max_output_tokens=600
+                        max_output_tokens=2500
                     )
                 )
                 response_text = res.text.strip()
