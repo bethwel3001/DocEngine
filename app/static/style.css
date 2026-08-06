@@ -1,0 +1,357 @@
+/* DocEngine - Light Mode Stylesheet with Comfortaa Typography */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Comfortaa', cursive, sans-serif;
+}
+
+body {
+    background-color: #FFFFFF;
+    color: #111827;
+    line-height: 1.6;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 720px;
+}
+
+.header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
+}
+
+.section h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #E5E7EB;
+}
+
+/* Upload Section */
+.upload-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    font-size: 13px;
+    font-weight: 400;
+    color: #374151;
+}
+
+button {
+    background-color: #2563EB;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    background-color: #1D4ED8;
+}
+
+button:disabled {
+    background-color: #9CA3AF;
+    cursor: not-allowed;
+}
+
+.text-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.text-btn.danger {
+    color: #DC2626;
+}
+
+.text-btn.danger:hover {
+    text-decoration: underline;
+}
+
+/* Document List */
+.documents-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.document-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.doc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #F3F4F6;
+    font-size: 13px;
+}
+
+.doc-name {
+    font-weight: 500;
+    color: #1F2937;
+}
+
+.doc-meta {
+    font-size: 12px;
+    font-weight: 300;
+    color: #6B7280;
+    margin-left: 8px;
+}
+
+.empty-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: #6B7280;
+}
+
+/* Query Section */
+.query-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #111827;
+    outline: none;
+    resize: vertical;
+}
+
+textarea:focus {
+    border-color: #2563EB;
+}
+
+/* Response Area */
+.response-area {
+    margin-top: 20px;
+}
+
+.status-message {
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.status-message.info {
+    background-color: #EFF6FF;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+}
+
+.status-message.error {
+    background-color: #FEF2F2;
+    color: #DC2626;
+    border: 1px solid #FCA5A5;
+}
+
+.status-message.success {
+    background-color: #ECFDF5;
+    color: #059669;
+    border: 1px solid #A7F3D0;
+}
+
+.answer-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #1F2937;
+    white-space: pre-wrap;
+    margin-bottom: 20px;
+}
+
+.citations-wrapper {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.citations-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.citation-item {
+    font-size: 12px;
+    font-weight: 300;
+    color: #4B5563;
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toast {
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    min-width: 260px;
+    max-width: 380px;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.toast.success {
+    background-color: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+}
+
+.toast.error {
+    background-color: #FEF2F2;
+    color: #991B1B;
+    border: 1px solid #FCA5A5;
+}
+
+.toast.info {
+    background-color: #EFF6FF;
+    color: #1E40AF;
+    border: 1px solid #BFDBFE;
+}
+
+/* Custom Confirmation Modal Popup */
+.confirm-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(17, 24, 39, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.confirm-modal-box {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: popupScale 0.2s ease;
+}
+
+@keyframes popupScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.confirm-modal-box h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.confirm-modal-box p {
+    font-size: 13px;
+    font-weight: 300;
+    color: #4B5563;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.confirm-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancel {
+    background-color: #F3F4F6;
+    color: #374151;
+    font-weight: 500;
+}
+
+.btn-cancel:hover {
+    background-color: #E5E7EB;
+}
+
+.btn-confirm-danger {
+    background-color: #DC2626;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.btn-confirm-danger:hover {
+    background-color: #B91C1C;
+}

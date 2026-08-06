@@ -1,0 +1,14 @@
+DocEngine AI Core - Official Operating Manual
+
+1. Overview
+DocEngine AI Core is a lightweight, low-latency RAG engine built using FastAPI, ChromaDB, and Google Gemini API.
+
+2. Cost Optimization
+- Rule 1: Limit maximum tokens to 300 for general query endpoints.
+- Rule 2: Use vector similarity search with top-k=3 to minimize prompt length.
+- Rule 3: Use text-embedding-004 for low-cost vector generation.
+
+3. Latency Metrics
+- Vector Search: < 50ms
+- Gemini Generation: < 450ms
+- Target Total Latency: < 600ms

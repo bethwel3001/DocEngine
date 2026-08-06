@@ -1,0 +1,19 @@
+# Environments & Secrets
+venv/
+.env
+*.env
+
+# Python Bytecode & Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# ChromaDB Data
+chroma_db/
+*.chroma
+
+# OS Files
+.DS_Store
+Thumbs.db

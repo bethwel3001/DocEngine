@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocEngine</title>
+    <!-- Google Fonts: Comfortaa -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <div class="container">
+        
+        <header class="header">
+            <h1>DocEngine</h1>
+        </header>
+
+        <main class="main-content">
+
+            <!-- Section 1: Document Upload and Management -->
+            <section class="section">
+                <h2>Knowledge Base Documents</h2>
+                
+                <div class="upload-controls">
+                    <input type="file" id="fileInput" accept=".pdf,.txt,.md,.json,.csv,.log">
+                    <button type="button" id="uploadBtn" onclick="uploadSelectedFile()">Upload Document</button>
+                </div>
+
+                <div class="documents-header">
+                    <h3>Uploaded Documents</h3>
+                    <button type="button" id="clearAllBtn" class="text-btn danger" onclick="requestClearAll()" style="display: none;">Clear All</button>
+                </div>
+
+                <div id="documentList" class="document-list">
+                    <p class="empty-text">No documents uploaded yet.</p>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Section 2: Query Interface -->
+            <section class="section">
+                <h2>Query Grounded Knowledge</h2>
+
+                <div class="query-controls">
+                    <textarea id="queryInput" placeholder="Enter your question here..." rows="3"></textarea>
+                    <button type="button" id="queryBtn" onclick="submitQuery()">Submit Query</button>
+                </div>
+
+                <div id="responseArea" class="response-area" style="display: none;">
+                    <div id="statusMessage" class="status-message"></div>
+                    
+                    <div id="responseBody" class="response-body" style="display: none;">
+                        <h3>Answer</h3>
+                        <div id="answerText" class="answer-text"></div>
+
+                        <div id="citationsWrapper" class="citations-wrapper" style="display: none;">
+                            <h3>Citations</h3>
+                            <ul id="citationsList" class="citations-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Custom Confirmation Modal Popup -->
+    <div id="confirmModal" class="confirm-modal-overlay" style="display: none;">
+        <div class="confirm-modal-box">
+            <h3 id="confirmModalTitle">Confirmation</h3>
+            <p id="confirmModalMessage">Are you sure you want to proceed?</p>
+            <div class="confirm-modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeConfirmModal(false)">Cancel</button>
+                <button type="button" id="confirmModalActionBtn" class="btn-confirm-danger" onclick="closeConfirmModal(true)">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
